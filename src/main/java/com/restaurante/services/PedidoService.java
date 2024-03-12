@@ -60,6 +60,14 @@ public interface PedidoService {
      */
     Pedido actualizarPedido(Long id, Pedido nuevoPedido) throws EntityNotFoundException, IllegalOperationException;
 
+    /**
+     * Asigna un cliente y un producto a un pedido existente.
+     * @param idPedido El ID del pedido al que se asignará el cliente y el producto.
+     * @param idCliente El ID del cliente que se asignará al pedido.
+     * @param idProducto El ID del producto que se asignará al pedido.
+     * @return El pedido actualizado con el cliente y el producto asignados.
+     * @throws EntityNotFoundException Si no se encuentra el pedido, el cliente o el producto con los IDs especificados.
+     * @throws IllegalOperationException Si ocurre una operación ilegal al intentar asignar el cliente y el producto al pedido.
+     */
     Pedido asignarClienteProducto(Long idPedido, Long idCliente, Long idProducto) throws EntityNotFoundException, IllegalOperationException;
-    
 }

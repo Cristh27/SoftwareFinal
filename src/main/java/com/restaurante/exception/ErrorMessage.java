@@ -12,6 +12,7 @@ import lombok.Data;
 @Data
 public final class ErrorMessage {
 	
+	/** Código de estado HTTP asociado con el mensaje de error. */
 	private int statusCode;
     
     /** Fecha y hora en que se generó el mensaje de error. */

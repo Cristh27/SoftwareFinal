@@ -20,12 +20,22 @@ public class PerfilServiceImp implements PerfilService {
     @Autowired
     private PerfilRepository perfilRepository;
 
+    /**
+     * Obtiene una lista de todos los perfiles.
+     * @return Una lista de perfiles.
+     */
     @Override
     @Transactional(readOnly = true)
     public List<Perfil> listarTodos() {
         return perfilRepository.findAll();
     }
 
+    /**
+     * Busca un perfil por su identificador.
+     * @param id El identificador del perfil a buscar.
+     * @return El perfil encontrado.
+     * @throws EntityNotFoundException Si no se encuentra el perfil con el ID especificado.
+     */
     @Override
     @Transactional(readOnly = true)
     public Perfil buscarPorId(Long id) throws EntityNotFoundException {
@@ -33,6 +43,12 @@ public class PerfilServiceImp implements PerfilService {
                 .orElseThrow(() -> new EntityNotFoundException("Perfil no encontrado con ID: " + id));
     }
 
+    /**
+     * Guarda un nuevo perfil.
+     * @param perfil El perfil a guardar.
+     * @return El perfil guardado.
+     * @throws IllegalOperationException Si ocurre una operación ilegal al intentar guardar el perfil.
+     */
     @Override
     @Transactional
     public Perfil grabar(Perfil perfil) throws IllegalOperationException {
@@ -40,6 +56,14 @@ public class PerfilServiceImp implements PerfilService {
         return perfilRepository.save(perfil);
     }
 
+    /**
+     * Actualiza un perfil existente.
+     * @param id El identificador del perfil a actualizar.
+     * @param perfil El perfil con los datos actualizados.
+     * @return El perfil actualizado.
+     * @throws EntityNotFoundException Si no se encuentra el perfil con el ID especificado.
+     * @throws IllegalOperationException Si ocurre una operación ilegal al intentar actualizar el perfil.
+     */
     @Override
     @Transactional
     public Perfil actualizar(Long id, Perfil perfil) throws EntityNotFoundException, IllegalOperationException {
@@ -52,6 +76,12 @@ public class PerfilServiceImp implements PerfilService {
         return perfilRepository.save(perfilExistente);
     }
 
+    /**
+     * Elimina un perfil.
+     * @param id El identificador del perfil a eliminar.
+     * @throws EntityNotFoundException Si no se encuentra el perfil con el ID especificado.
+     * @throws IllegalOperationException Si ocurre una operación ilegal al intentar eliminar el perfil.
+     */
     @Override
     @Transactional
     public void eliminar(Long id) throws EntityNotFoundException, IllegalOperationException {

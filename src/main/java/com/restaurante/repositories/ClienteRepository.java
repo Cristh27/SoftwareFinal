@@ -17,6 +17,4 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
      * @return Una lista de clientes que coinciden con el nombre especificado.
      */
     List<Cliente> findByNombre(String nombre);
-    
-    
 }

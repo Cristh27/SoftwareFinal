@@ -6,12 +6,38 @@ import com.restaurante.domain.Producto;
 
 import lombok.Data;
 
+/**
+ * DTO que representa un producto en el sistema.
+ */
 @Data
 public class ProductoDTO {
-	 private Long id;
-	    private String nombre;
-	    private String descripcion;
-	    private double precio;
-	    private ProductoDTO variante;
-	    private List<Producto> pedidosIds;
+    /** 
+     * Identificador único del producto. 
+     */
+    private Long id;
+    
+    /** 
+     * Nombre del producto. 
+     */
+    private String nombre;
+    
+    /** 
+     * Descripción del producto. 
+     */
+    private String descripcion;
+    
+    /** 
+     * Precio del producto. 
+     */
+    private double precio;
+    
+    /** 
+     * Producto variante asociado, si lo hay. 
+     */
+    private ProductoDTO variante;
+    
+    /** 
+     * Lista de IDs de los pedidos asociados a este producto. 
+     */
+    private List<Producto> pedidosIds;
 }

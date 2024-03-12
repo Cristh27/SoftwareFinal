@@ -2,6 +2,8 @@ package com.restaurante.exception;
 
 /**
  * Excepción personalizada que representa el caso en que una entidad no es encontrada.
+ * Author: Jesus
+ * Hora: 7:00
  */
 public class EntityNotFoundException extends Exception {
     private static final long serialVersionUID = 1L;

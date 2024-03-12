@@ -1,13 +1,11 @@
 package com.restaurante.services;
 
-
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import com.restaurante.domain.Cliente;
 import com.restaurante.repositories.ClienteRepository;
@@ -26,7 +24,8 @@ public class ClienteServiceImp implements ClienteService {
 
     /**
      * Obtiene una lista de todos los clientes.
-     * @return Una lista de clientes.
+     * 
+     * @return Una lista de todos los clientes.
      */
     @Override
     @Transactional(readOnly = true)
@@ -36,6 +35,7 @@ public class ClienteServiceImp implements ClienteService {
 
     /**
      * Busca un cliente por su identificador.
+     * 
      * @param id El identificador del cliente a buscar.
      * @return El cliente encontrado.
      * @throws EntityNotFoundException Si no se encuentra el cliente con el ID especificado.
@@ -48,7 +48,8 @@ public class ClienteServiceImp implements ClienteService {
     }
 
     /**
-     * Guarda un nuevo cliente.
+     * Guarda un nuevo cliente en la base de datos.
+     * 
      * @param cliente El cliente a guardar.
      * @return El cliente guardado.
      * @throws IllegalOperationException Si ocurre una operación ilegal al intentar guardar el cliente.
@@ -56,53 +57,59 @@ public class ClienteServiceImp implements ClienteService {
     @Override
     @Transactional
     public Cliente grabar(Cliente cliente) throws IllegalOperationException {
-    	if(!clienteRepository.findByNombre(cliente.getNombre()).isEmpty()) {
-			throw new IllegalOperationException("El nombre del departamento ya existe");
-		}
-		return clienteRepository.save(cliente);
+        if (!clienteRepository.findByNombre(cliente.getNombre()).isEmpty()) {
+            throw new IllegalOperationException("El nombre del cliente ya existe");
+        }
+        return clienteRepository.save(cliente);
     }
 
     /**
-     * Actualiza un cliente existente.
-     * @param id El identificador del cliente a actualizar.
+     * Actualiza un cliente existente en la base de datos.
+     * 
+     * @param id      El identificador del cliente a actualizar.
      * @param cliente El cliente con los datos actualizados.
      * @return El cliente actualizado.
-     * @throws EntityNotFoundException Si no se encuentra el cliente con el ID especificado.
+     * @throws EntityNotFoundException    Si no se encuentra el cliente con el ID especificado.
      * @throws IllegalOperationException Si ocurre una operación ilegal al intentar actualizar el cliente.
      */
     @Override
     @Transactional
     public Cliente actualizar(Long id, Cliente cliente) throws EntityNotFoundException, IllegalOperationException {
-    	Optional<Cliente> clienteEntity = clienteRepository.findById(id);
-		if(clienteEntity.isEmpty())
-			throw new EntityNotFoundException(ErrorMessage.CLIENTE_NOT_FOUND);
-		if(!clienteRepository.findByNombre(cliente.getNombre()).isEmpty()) {
-			throw new IllegalOperationException("El nombre del cliente ya existe");
-		}	
-		cliente.setId(id);		
-		return clienteRepository.save(cliente);
-	}
-    
+        Optional<Cliente> clienteEntity = clienteRepository.findById(id);
+        if (clienteEntity.isEmpty())
+            throw new EntityNotFoundException(ErrorMessage.CLIENTE_NOT_FOUND);
+        if (!clienteRepository.findByNombre(cliente.getNombre()).isEmpty()) {
+            throw new IllegalOperationException("El nombre del cliente ya existe");
+        }
+        cliente.setId(id);
+        return clienteRepository.save(cliente);
+    }
 
     /**
-     * Elimina un cliente.
-     * @param id El identificador del cliente a eliminar.
-     * @throws EntityNotFoundException Si no se encuentra el cliente con el ID especificado.
+     * Elimina un cliente de la base de datos.
+     * 
+     * @param idCliente El identificador del cliente a eliminar.
+     * @throws EntityNotFoundException    Si no se encuentra el cliente con el ID especificado.
      * @throws IllegalOperationException Si ocurre una operación ilegal al intentar eliminar el cliente.
      */
     @Override
     @Transactional
     public void eliminar(Long idCliente) throws EntityNotFoundException, IllegalOperationException {
-    	Cliente cliente = clienteRepository.findById(idCliente).orElseThrow(
-				()->new EntityNotFoundException(ErrorMessage.CLIENTE_NOT_FOUND)
-				);
-    	if (!(cliente.getPedidos().isEmpty())) {
-			throw new IllegalOperationException("El cliente tiene pedidos asignados");
-		}
-	
-						
-		clienteRepository.deleteById(idCliente);
+        Cliente cliente = clienteRepository.findById(idCliente).orElseThrow(
+                () -> new EntityNotFoundException(ErrorMessage.CLIENTE_NOT_FOUND)
+        );
+        if (!(cliente.getPedidos().isEmpty())) {
+            throw new IllegalOperationException("El cliente tiene pedidos asignados");
+        }
+        clienteRepository.deleteById(idCliente);
     }
+
+    /**
+     * Busca clientes por su nombre en la base de datos.
+     * 
+     * @param nombre El nombre del cliente a buscar.
+     * @return Una lista de clientes que coinciden con el nombre especificado.
+     */
     @Override
     public List<Cliente> buscarPorNombre(String nombre) {
         return clienteRepository.findByNombre(nombre);

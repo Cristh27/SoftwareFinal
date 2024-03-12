@@ -1,0 +1,9 @@
+com.restaurante
+com.restaurante.config
+com.restaurante.controllers
+com.restaurante.domain
+com.restaurante.dto
+com.restaurante.exception
+com.restaurante.repositories
+com.restaurante.services
+com.restaurante.util

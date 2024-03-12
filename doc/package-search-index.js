@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.restaurante"},{"l":"com.restaurante.config"},{"l":"com.restaurante.controllers"},{"l":"com.restaurante.domain"},{"l":"com.restaurante.dto"},{"l":"com.restaurante.exception"},{"l":"com.restaurante.repositories"},{"l":"com.restaurante.services"},{"l":"com.restaurante.util"}];updateSearchResults();

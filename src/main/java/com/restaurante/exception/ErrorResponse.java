@@ -7,6 +7,7 @@ import lombok.Data;
  */
 @Data
 public class ErrorResponse {
+    /** El mensaje de error. */
     private String message;
 
     /**
